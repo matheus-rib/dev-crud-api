@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  cli:
+    build:
+      context: ./docker
+      dockerfile: dev.Dockerfile
+    user: '1000'
+    command: bash
+    volumes:
+      - ./:/app
+      - ~/.gitconfig/:/root/.gitconfig
+    working_dir: /app
+  
+  test:
+    build:
+      context: ./docker
+      dockerfile: dev.Dockerfile
+    user: '1000'
+    command: yarn test
+    env_file: .env.test
+    volumes:
+      - ./:/app
+      - ~/.gitconfig/:/root/.gitconfig
+    working_dir: /app

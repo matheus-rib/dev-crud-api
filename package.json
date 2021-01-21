@@ -38,6 +38,16 @@
     "express": "^4.17.1",
     "http": "^0.0.1-security",
     "pg": "^8.5.1",
+    "reflect-metadata": "^0.1.13",
+    "response-time": "^2.3.2",
     "typeorm": "^0.2.30"
+  },
+  "scripts": {
+    "dev": "nodemon --watch 'src/' --exec \"ts-node --fast src/server.ts\" -e ts",
+    "test": "jest --maxWorkers=1",
+    "typeorm-ts": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "docker:test": "docker-compose -p dev-crud-test -f docker-compose-test.yml run --rm test",
+    "docker:migration:run": "docker-compose -f docker-compose-cli.yml run --rm cli yarn typeorm-ts migration:run",
+    "docker:migration:generate": "docker-compose -f docker-compose-cli.yml run --rm cli yarn typeorm-ts migration:generate -- -n"
   }
 }

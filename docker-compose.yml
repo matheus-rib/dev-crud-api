@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  api:
+    build:
+      context: ./docker
+      dockerfile: dev.Dockerfile
+    command: ["yarn", "dev"]
+    env_file: .env
+    ports:
+      - 4000:80
+    volumes:
+      - ./:/app
+    working_dir: /app
+    links: 
+      - db
+  
+  db:
+    image: postgres
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD} 
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - 5432:5432
+    volumes:
+      - dev-crud-volume:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+
+volumes:
+  dev-crud-volume:

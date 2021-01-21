@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  test:
+    image: node:12-alpine
+    user: '1000'
+    command: yarn test
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: test_postgres
+      DB_PORT: 5432
+      DB_USERNAME: root
+      DB_PASSWORD: test
+      DB_DATABASE: dev-crud-test
+      JWT_SECRET: gKlvDwVn9kyZgRnFEAk4rTGxu0kVNwK4
+    volumes:
+      - ./:/app
+    working_dir: /app
+    depends_on:
+      - test_postgres
+
+  test_postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: dev-crud-test
