@@ -7,6 +7,14 @@ import RequiredError from '../errors/RequiredError'
 import responsePaginationHandler from '../utils/responsePaginationHandler'
 import { LocalsPagination } from '../utils/types'
 
+type ListQuery = {
+  name?: string,
+  hobby?: string,
+  gender?: string,
+  age?: string,
+  dateOfBirth?: string,
+}
+
 function sanitizeRequest (req: Request): DeepPartial<Developer> {
   const rules = {
     name: true,
@@ -37,7 +45,7 @@ async function list (req: Request, res: Response): Promise<void> {
     { name: 'gender', rule: 'equal' },
     { name: 'age', rule: 'equal' },
     { name: 'dateOfBirth', rule: 'equal' }]
-  const query: any = {}
+  const query: ListQuery = {}
 
   fields.forEach(field => {
     if (q[field.name]) {
