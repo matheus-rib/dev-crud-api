@@ -1,0 +1,359 @@
+_type: export
+__export_format: 4
+__export_date: 2021-01-22T20:44:44.928Z
+__export_source: insomnia.desktop.app:v2020.5.2
+resources:
+  - _id: req_50b206465c864966a6b2c60158d9313d
+    parentId: fld_7662bcbb33d4475c9748f17bcdaffcbc
+    modified: 1611347732905
+    created: 1611269513155
+    url: "{{ _.baseUrl }}/developers"
+    name: List
+    description: >-
+      Returns a list of developers
+
+
+      ## Pagination:
+
+      Add to query the params you want to make your pagination
+
+
+      | Param | Default |  Explanation
+
+      |-------|---------|--------------
+
+      | page  | 1       | Page you want to browse
+
+      | take  | 30      | Limit results per page
+
+
+      ## Filters (Query):
+
+      Filters can be used by adding a `q` object in your query and adding a field name you want to to filter in brackets. Eg: `q[name]` to filter list by name
+
+
+      ### Available filters:
+
+
+      | Filter         | Operator | Data type 
+
+      |----------------|----------|-----------
+
+      | q[id]          | equal    | `number`
+
+      | q[name]        | like     | `string`
+
+      | q[hobby]       | like     | `string`
+
+      | q[gender]      | equal    | `string<GenderEnum>`
+
+      | q[age]         | equal    | `number`
+
+      | q[dateOfBirth] | equal    | `string<Date>`
+
+
+      #### Enums:
+
+      GenderEnum: `M`, `F`
+
+
+      #### Data dictionary:
+
+      `string<Date>`: String that corresponds to a Date in format `YYYY-MM-DD`
+
+
+      ### Filter types:
+
+      | Filter | Explanation
+
+      |--------|----------
+
+      | equal  | Search by the exact expression
+
+      | like   | Search by similar (case sensitve) expressions
+
+
+      ## Response example:
+
+      ```JSON
+
+      {
+        "page": 1,
+        "pages": 1,
+        "count": 1,
+        "rows": [
+          {
+            "id": 1,
+            "createdAt": "2021-01-21T23:30:52.882Z",
+            "updatedAt": "2021-01-22T00:05:29.936Z",
+            "name": "Matheus",
+            "gender": "m",
+            "age": 23,
+            "hobby": "Programming",
+            "dateOfBirth": "1997-12-25T00:00:00.000Z"
+          }
+        ]
+      }
+
+      ```
+    method: GET
+    body: {}
+    parameters:
+      - name: q[name]
+        value: M
+        description: ""
+        id: pair_98afec9b60a14d14b7b865848b370563
+    headers: []
+    authentication: {}
+    metaSortKey: -1611269500833
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_7662bcbb33d4475c9748f17bcdaffcbc
+    parentId: wrk_5d13f4cd70d74d74998c3e8f72ec8e0a
+    modified: 1611269496626
+    created: 1611269496626
+    name: Developers
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1611269496626
+    _type: request_group
+  - _id: wrk_5d13f4cd70d74d74998c3e8f72ec8e0a
+    parentId: null
+    modified: 1611269441890
+    created: 1611269441890
+    name: Dev-Crud
+    description: ""
+    scope: null
+    _type: workspace
+  - _id: req_e5781ff2f86a47308ea37bc71e99b41d
+    parentId: fld_7662bcbb33d4475c9748f17bcdaffcbc
+    modified: 1611347085858
+    created: 1611269516172
+    url: "{{ _.baseUrl }}/developers/1"
+    name: Show
+    description: |-
+      Returns a developer matching to the ID in route
+
+      ## Response Example
+      ```JSON
+      {
+        "id": 1,
+        "createdAt": "2021-01-21T23:30:52.882Z",
+        "updatedAt": "2021-01-22T00:05:29.936Z",
+        "name": "Matheus",
+        "gender": "m",
+        "age": 23,
+        "hobby": "Programming",
+        "dateOfBirth": "1997-12-25T00:00:00.000Z"
+      }
+      ```
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1611269500808
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d19cd3ecb6954a5a8634a19fbac1a55f
+    parentId: fld_7662bcbb33d4475c9748f17bcdaffcbc
+    modified: 1611348023727
+    created: 1611269500782
+    url: "{{ _.baseUrl }}/developers"
+    name: Create
+    description: |-
+      Create and returns a developer
+
+      ## Body Params:
+
+      | Param        | Data Type            | Required | Default
+      |--------------|----------------------|----------|-----------
+      | name         | `string`             | `true`   | -
+      | hobby        | `string`             | `true`   | -
+      | gender       | `string<GenderEnum>` | `true`   | -
+      | dateOfBirth  | `string<Date>`       | `true`   | -
+
+
+      ### Enums:
+      GenderEnum: `M`, `F`
+
+      ### Data dictionary:
+      `string<Date>`: String that corresponds to a Date in format `YYYY-MM-DD`
+
+
+      ## Response Example
+      ```JSON
+      {
+        "id": 1,
+        "createdAt": "2021-01-21T23:30:52.882Z",
+        "updatedAt": "2021-01-22T00:05:29.936Z",
+        "name": "Matheus",
+        "gender": "m",
+        "age": 23,
+        "hobby": "Programming",
+        "dateOfBirth": "1997-12-25T00:00:00.000Z"
+      }
+      ```
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Giovani",
+        	"age": 23,
+        	"hobby": "morrer no Tibia",
+        	"gender": "m",
+        	"dateOfBirth": "1997-12-27"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_61760f87f6ad4778ab5bd13a75eaa7b0
+    authentication: {}
+    metaSortKey: -1611269500783
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ed1408d4c0d54754965685b20d7ecd0a
+    parentId: fld_7662bcbb33d4475c9748f17bcdaffcbc
+    modified: 1611347849867
+    created: 1611269506028
+    url: "{{ _.baseUrl }}/developers/1"
+    name: Update
+    description: |-
+      Update and returns a developer
+
+      ## Body Params:
+
+      | Param        | Data Type            
+      |--------------|-----------
+      | name         | `string`
+      | hobby        | `string` 
+      | gender       | `string<GenderEnum>`
+      | dateOfBirth  | `string<Date>`
+
+      ### Enums:
+      GenderEnum: `M`, `F`
+
+      ### Data dictionary:
+      `string<Date>`: String that corresponds to a Date in format `YYYY-MM-DD`
+
+      ## Response Example
+      ```JSON
+      {
+        "id": 1,
+        "createdAt": "2021-01-21T23:30:52.882Z",
+        "updatedAt": "2021-01-22T00:05:29.936Z",
+        "name": "Matheus",
+        "gender": "m",
+        "age": 23,
+        "hobby": "Programming",
+        "dateOfBirth": "1997-12-25T00:00:00.000Z"
+      }
+      ```
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "dateOfBirth": "1995-12-25"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_0ce844eab29941d69f5287b36d9615b3
+    authentication: {}
+    metaSortKey: -1610918988397
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_bc7b8b4b7b3a47c4b0720688556edc0c
+    parentId: fld_7662bcbb33d4475c9748f17bcdaffcbc
+    modified: 1611348010937
+    created: 1611269510476
+    url: "{{ _.baseUrl }}/developers/3"
+    name: Destroy
+    description: |-
+      Deletes a developer based on route ID in params
+
+
+      Response Code: `204` - No Content
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1610743732204
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_4de802f8f5827190f2d37d13cfd7e3bebcf5187b
+    parentId: wrk_5d13f4cd70d74d74998c3e8f72ec8e0a
+    modified: 1611269453918
+    created: 1611269442128
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: {}
+    color: null
+    isPrivate: false
+    metaSortKey: 1611269442128
+    _type: environment
+  - _id: jar_4de802f8f5827190f2d37d13cfd7e3bebcf5187b
+    parentId: wrk_5d13f4cd70d74d74998c3e8f72ec8e0a
+    modified: 1611269442137
+    created: 1611269442137
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_5008c161bff34ead9c6cd3e76640b7c6
+    parentId: wrk_5d13f4cd70d74d74998c3e8f72ec8e0a
+    modified: 1611269441898
+    created: 1611269441898
+    fileName: Dev-Crud
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: env_b0e6c774465049a686db5d0b63d79d07
+    parentId: env_4de802f8f5827190f2d37d13cfd7e3bebcf5187b
+    modified: 1611269613494
+    created: 1611269470478
+    name: Development
+    data:
+      baseUrl: http://localhost:4000
+    dataPropertyOrder:
+      "&":
+        - baseUrl
+    color: null
+    isPrivate: false
+    metaSortKey: 1611269470478
+    _type: environment

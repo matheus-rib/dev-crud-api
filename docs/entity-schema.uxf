@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>870</x>
+      <y>390</y>
+      <w>260</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>Developer
+--
+id: int(unsigned)
+createdAt: Date
+updatedAt: Date
+name: varchar
+gender: Enum&lt;DeveloperGender&gt;
+age: int
+hobby: varchar
+dateOfBirth: Date</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1210</x>
+      <y>450</y>
+      <w>150</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>bg=blue
+DeveloperGender
+--
+- m
+- f</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1120</x>
+      <y>460</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
+  </element>
+</diagram>
