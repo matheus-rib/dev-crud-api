@@ -19,9 +19,9 @@ function sanitizeRequest (req: Request): DeepPartial<Developer> {
 }
 
 function calculateAge (dateOfBirth: Date): number {
-  const yearTimestamp = 3600 * 24 * 365.25 * 1000
-
-  return (Date.now() - +dateOfBirth / yearTimestamp)
+  const ageDifferenceMs = Date.now() - dateOfBirth.getTime()
+  const ageDate = new Date(ageDifferenceMs)
+  return Math.abs(ageDate.getUTCFullYear() - 1970)
 }
 
 async function list (req: Request, res: Response): Promise<void> {
@@ -59,7 +59,8 @@ async function create (req: Request, res: Response): Promise<void> {
     if (!developerBody[field]) throw new RequiredError(field)
   })
 
-  developerBody.age = calculateAge(req.body.dateOfBirth)
+  developerBody.age = calculateAge(new Date(req.body.dateOfBirth))
+
   const newDeveloper = Developer.create(developerBody)
   await newDeveloper.save()
 
