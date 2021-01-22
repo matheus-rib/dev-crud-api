@@ -40,6 +40,7 @@ async function list (req: Request, res: Response): Promise<void> {
   const { q = {} } = req.query
 
   const fields = [
+    { name: 'id', rule: 'equal' },
     { name: 'name', rule: 'like' },
     { name: 'hobby', rule: 'like' },
     { name: 'gender', rule: 'equal' },
