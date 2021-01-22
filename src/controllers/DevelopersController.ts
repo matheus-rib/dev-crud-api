@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import { sanitize } from 'paliari-js-utils'
 import { DeepPartial, Like } from 'typeorm'
 import { Developer } from '../entity/Developer'
+import ApiError from '../errors/ApiError'
 import RequiredError from '../errors/RequiredError'
 import responsePaginationHandler from '../utils/responsePaginationHandler'
 import { LocalsPagination } from '../utils/types'
@@ -19,6 +20,8 @@ function sanitizeRequest (req: Request): DeepPartial<Developer> {
 }
 
 function calculateAge (dateOfBirth: Date): number {
+  if (!dateOfBirth.getTime()) throw new ApiError({ code: 'invalidDateString', message: 'Invalid date string' })
+
   const ageDifferenceMs = Date.now() - dateOfBirth.getTime()
   const ageDate = new Date(ageDifferenceMs)
   return Math.abs(ageDate.getUTCFullYear() - 1970)
