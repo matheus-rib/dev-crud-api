@@ -6,7 +6,7 @@ export default class ModelValidationError extends ApiError {
       message: 'Invalid model',
       code: 'modelValidation',
       additionalProperties: { errors },
-      httpStatus: 409,
+      httpStatus: 400,
     })
   }
 }

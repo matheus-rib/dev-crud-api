@@ -4459,6 +4459,11 @@ packet-reader@1.0.0:
   resolved "https://registry.yarnpkg.com/packet-reader/-/packet-reader-1.0.0.tgz#9238e5480dedabacfe1fe3f2771063f164157d74"
   integrity sha512-HAKu/fG3HpHFO0AA8WE8q2g+gBJaZ9MG7fcKk+IJPLTGAD6Psw4443l+9DGRbOIh3/aXr7Phy0TjilYivJo5XQ==
 
+paliari-js-utils@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/paliari-js-utils/-/paliari-js-utils-0.3.1.tgz#2626ead4e47871109e6bc23ed60d7b49cccced38"
+  integrity sha512-8eLqUWLkt4sGZt5lHnD0Ln6x8Xjq+hHtUYuxSxgDx2XUe+Y4yF744QK59O98FTiV5Mqt2ib4td0c4/ZCfUOZSA==
+
 parent-module@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/parent-module/-/parent-module-1.0.1.tgz#691d2709e78c79fae3a156622452d00762caaaa2"
