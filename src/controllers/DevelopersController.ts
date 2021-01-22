@@ -54,7 +54,7 @@ async function show (req: Request, res: Response): Promise<void> {
 async function create (req: Request, res: Response): Promise<void> {
   const developerBody = sanitizeRequest(req)
 
-  const requiredFields = ['name', 'age', 'hobby', 'gender', 'dateOfBirth']
+  const requiredFields = ['name', 'hobby', 'gender', 'dateOfBirth']
   requiredFields.forEach(field => {
     if (!developerBody[field]) throw new RequiredError(field)
   })
