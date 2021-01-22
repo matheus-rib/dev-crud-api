@@ -18,6 +18,12 @@ function sanitizeRequest (req: Request): DeepPartial<Developer> {
   return sanitize(req.body, rules)
 }
 
+function calculateAge (dateOfBirth: Date): number {
+  const yearTimestamp = 3600 * 24 * 365.25 * 1000
+
+  return (Date.now() - +dateOfBirth / yearTimestamp)
+}
+
 async function list (req: Request, res: Response): Promise<void> {
   const { pagination } = res.locals as LocalsPagination
   const { q = {} } = req.query
@@ -53,6 +59,7 @@ async function create (req: Request, res: Response): Promise<void> {
     if (!developerBody[field]) throw new RequiredError(field)
   })
 
+  developerBody.age = calculateAge(req.body.dateOfBirth)
   const newDeveloper = Developer.create(developerBody)
   await newDeveloper.save()
 
@@ -63,6 +70,8 @@ async function update (req: Request, res: Response): Promise<void> {
   const body = sanitizeRequest(req)
 
   const { developer } = res.locals as { developer: Developer }
+
+  if (body.dateOfBirth) body.age = calculateAge(req.body.dateOfBirth)
 
   developer.setAttributes(body)
   await developer.save()
