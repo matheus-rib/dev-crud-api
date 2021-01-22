@@ -75,6 +75,12 @@ yarn docker:test yarn test __tests__/folder_you_wanna_test/...
   - Select `./docs/insomnia.yaml`
 
 #### Routes
+  - Developers ('`/developers`')
+    - List (GET - '`/`'): Returns a list of developers
+    - Show (GET - '`/:developerId`'): Returns a developer matching to the developerId in route
+    - Create (POST - '`/`'): Create and returns a developer
+    - Update (PUT - '`/:developerId`'): Update and returns a developer
+    - Destroy (DELETE - '`/:developerId`'): Deletes a developer based on route developerId in params
 
 ### Entities Schema
 - Install [UMLet](https://www.umlet.com)
@@ -83,6 +89,14 @@ yarn docker:test yarn test __tests__/folder_you_wanna_test/...
   - Select `./docs/entity-schema.uxf`
 
 #### Entities
-
+  - Developer:
+    - id: `int(unsigned)`
+    - createdAt: `Date`
+    - updatedAt: `Date`
+    - name: `varchar`
+    - gender: `m` | `f`
+    - age: `int`
+    - hobby: `varchar`
+    - dateOfBirth: `Date`
 ## Authors
 - Matheus Ribeiro
