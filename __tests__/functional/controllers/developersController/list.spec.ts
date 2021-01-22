@@ -89,6 +89,28 @@ it('should return a paginated developers list filtered by name with 1 rows and 1
   )
 })
 
+it('should return a paginated developers list filtered by id with 1 rows and 1 page', async () => {
+  const { body, status } = await request(api.server).get('/developers').query({ q: { id: developer1.id } })
+
+  expect(status).toBe(200)
+
+  expect(body).toHaveProperty('page')
+  expect(body.page).toBe(1)
+
+  expect(body).toHaveProperty('pages')
+  expect(body.pages).toBe(1)
+
+  expect(body).toHaveProperty('count')
+  expect(body.count).toBe(1)
+
+  expect(body).toHaveProperty('rows')
+  expect(body.rows).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({ name: developer1.name, age: developer1.age, hobby: developer1.hobby, gender: developer1.gender }),
+    ]),
+  )
+})
+
 it('should return a paginated developers list filtered by hobbie with 2 rows and 1 page', async () => {
   const { body, status } = await request(api.server).get('/developers').query({ q: { hobbie: 'Programar' } })
 
