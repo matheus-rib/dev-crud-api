@@ -1,8 +1,10 @@
 import { Request, Response } from 'express'
 import { sanitize } from 'paliari-js-utils'
-import { DeepPartial } from 'typeorm'
+import { DeepPartial, Like } from 'typeorm'
 import { Developer } from '../entity/Developer'
 import RequiredError from '../errors/RequiredError'
+import responsePaginationHandler from '../utils/responsePaginationHandler'
+import { LocalsPagination } from '../utils/types'
 
 function sanitizeRequest (req: Request): DeepPartial<Developer> {
   const rules = {
@@ -17,9 +19,26 @@ function sanitizeRequest (req: Request): DeepPartial<Developer> {
 }
 
 async function list (req: Request, res: Response): Promise<void> {
-  const developers = await Developer.findAndCount()
+  const { pagination } = res.locals as LocalsPagination
+  const { q = {} } = req.query
 
-  res.json(developers)
+  const fields = [
+    { name: 'name', rule: 'like' },
+    { name: 'hobby', rule: 'like' },
+    { name: 'gender', rule: 'equal' },
+    { name: 'age', rule: 'equal' },
+    { name: 'dateOfBirth', rule: 'equal' }]
+  const query: any = {}
+
+  fields.forEach(field => {
+    if (q[field.name]) {
+      query[field.name] = field.rule === 'equal' ? q[field.name] : Like(`%${q[field.name].replace(/ /g, '%')}%`)
+    }
+  })
+
+  const [rows, count] = await Developer.getRepository().createQueryBuilder().where(query).skip(pagination.skip).take(pagination.take).orderBy('id', 'ASC').getManyAndCount()
+
+  res.json(responsePaginationHandler({ rows, count, pagination }))
 }
 
 async function show (req: Request, res: Response): Promise<void> {
