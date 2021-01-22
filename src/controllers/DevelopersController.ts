@@ -83,7 +83,7 @@ async function update (req: Request, res: Response): Promise<void> {
 
   const { developer } = res.locals as { developer: Developer }
 
-  if (body.dateOfBirth) body.age = calculateAge(req.body.dateOfBirth)
+  if (body.dateOfBirth) body.age = calculateAge(new Date(req.body.dateOfBirth))
 
   developer.setAttributes(body)
   await developer.save()
