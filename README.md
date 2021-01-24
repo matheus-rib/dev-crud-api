@@ -1,14 +1,18 @@
 # Dev-CRUD API
-API made with Typescript and PostgreSQL
+API made with Typescript and PostgreSQL. [Dev-CRUD Client](https://github.com/matheus-rib/dev-crud-client/) is using it. 
 
 Developing with [Docker](https://www.docker.com) (and Docker-Compose)
 
+
 ## Table of Contents
   - [Requirements](#requirements)
-  - [Run the API](#run-the-api)
-  - [Migrations](#migrations)
-  - [Run commands](#run-commands)
-  - [Tests](#tests)
+  - [How to run](#how-to-run)
+  - [Commands](#commands)
+    - [Install dependencies](#install-dependencies)
+    - [Run the API](#run-the-api)
+    - [Migrations](#migrations)
+    - [Run commands](#run-commands)
+    - [Tests](#tests)
   - [Docs](#docs)
     - [Rest API](#rest-api)
       - [Routes](#routes)
@@ -22,18 +26,27 @@ Developing with [Docker](https://www.docker.com) (and Docker-Compose)
 - UMLet (for entities schema)
 - NPM or Yarn
 
-## Run the API
+## How to run
+- Create `.env` file using `.env.example` as base
+- Install dependencies ([check commands session](#commands))
+- Run the API ([check commands session](#commands))
+- Run the migrations ([check commands session](#commands))
+
+## Commands
+### Install dependencies
 ```bash
 # Install dependencies
 docker-compose run --rm api yarn
 # or: docker-compose run --rm api npm install
-
+```
+### Run the API
+```bash
 # Start the api
 docker-compose up
 # Then open http://localhost:4000
 ```
 
-## Migrations
+### Migrations
 - Run migrations
 ```bash
 # API must be running
